@@ -64,6 +64,7 @@ Status insert_at(List_ptr list, int value, int position) {
   }
   node->next = p_walk->next;
   p_walk->next = node;
+  list->count++;
   return Success;
 };
 
@@ -79,8 +80,27 @@ Status add_unique(List_ptr list, int value){
 }
 
 Status remove_from_start(List_ptr list){
+  if(list->count == 0){
+    return Failure;
+  }
   Node_ptr p_walk = list->head;
   list->head = p_walk->next;
+  list->count--;
+  free(p_walk);
+  return Success;
+};
+
+Status remove_from_end(List_ptr list){
+  if(list->count == 0){
+    return Failure;
+  }
+  Node_ptr p_walk = list->head;
+  while(p_walk->next != NULL){
+     list->last = p_walk;
+    p_walk = p_walk->next;
+  }
+  list->last->next = NULL;
+  list->count--;
   free(p_walk);
   return Success;
 };

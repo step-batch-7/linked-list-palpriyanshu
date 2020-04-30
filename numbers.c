@@ -16,6 +16,7 @@ void display_main_menu(void){
   printf("(c) insert a number at a given position in the list\n");
   printf("(d) add a unique item on the list at the end(if it alreay exists, do not insert)\n");
   printf("(e) remove a number from the beginning of the list\n");
+  printf("(f) remove a number from the end of the list\n");
   printf("(l) display the list of numbers\n");
   printf("(m) exit\n\n");
   printf("Please enter the alphabet of the operation you would like to perform\n");
@@ -72,6 +73,12 @@ void do_action(List_ptr list, char index){
     case 'e':
     {
       status = remove_from_start(list);
+      break;
+    }
+
+    case 'f':
+    {
+      status = remove_from_end(list);
       break;
     }
 
