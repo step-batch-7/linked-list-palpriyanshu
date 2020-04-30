@@ -78,6 +78,13 @@ Status add_unique(List_ptr list, int value){
   return add_to_end(list, value);
 }
 
+Status remove_from_start(List_ptr list){
+  Node_ptr p_walk = list->head;
+  list->head = p_walk->next;
+  free(p_walk);
+  return Success;
+};
+
 void display(List_ptr list){
   Node_ptr p_walk = list->head;
   while (p_walk != NULL ) {
