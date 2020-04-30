@@ -41,3 +41,27 @@ Status add_to_start(List_ptr list, int value){
   list->count++;
   return Success;
 };
+
+Status insert_at(List_ptr list, int value, int position) {
+  if(position < 0 || position > list->count){
+    return Failure;
+  }
+  if(position == 0){
+    return add_to_start(list, value);
+  }
+  if(position == list->count){
+    return add_to_end(list, value);
+  }
+  
+  int count = 1;
+  Node_ptr node = create_node(value);
+  Node_ptr p_walk = list->head;
+  while (count != position)
+  {
+    p_walk = p_walk->next;
+    count++;
+  }
+  node->next = p_walk->next;
+  p_walk->next = node;
+  return Success;
+};
