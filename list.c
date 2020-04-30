@@ -1,5 +1,6 @@
-#include "list.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include "list.h"
 
 List_ptr create_list(void){
   List_ptr list = malloc(sizeof(List));
@@ -77,3 +78,10 @@ Status add_unique(List_ptr list, int value){
   return add_to_end(list, value);
 }
 
+void display(List_ptr list){
+  Node_ptr p_walk = list->head;
+  while (p_walk != NULL ) {
+    printf("%d\n", p_walk->value);
+    p_walk = p_walk->next;
+  }
+}

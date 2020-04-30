@@ -6,14 +6,16 @@ typedef char * string;
 void display_main_menu(void);
 char get_cmd(void);
 int getNum(string text);
+void do_action(List_ptr list, char index);
 
 void display_main_menu(void){
-  printf("Main Menu\n");
+  printf("\nMain Menu\n");
   printf("---------\n");
   printf("(a) add a number to the end of the list\n");
   printf("(b) add a number to the start of the list\n");
   printf("(c) insert a number at a given position in the list\n");
   printf("(d) add a unique item on the list at the end(if it alreay exists, do not insert)\n");
+  printf("(l) display the list of numbers\n");
   printf("(m) exit\n\n");
   printf("Please enter the alphabet of the operation you would like to perform\n");
 };
@@ -34,39 +36,44 @@ int getNum(string text){
   return num;
 };
 
-Status do_action(List_ptr list, char index){
+void do_action(List_ptr list, char index){
   Status status;
   switch (index){
-      case 'a':
-      {
-        int num = getNum( "Please enter a number : ");
-        status = add_to_end(list, num);
-        break;
-      }
-
-      case 'b':
-      {
-        int num = getNum( "Please enter a number : ");
-        status = add_to_start(list, num);
-        break;
-      }
-
-      case 'c':
-      {
-        int value = getNum("Please enter a number : ");
-        int position = getNum("Please enter the position : ");
-        status = insert_at(list, value, position);
-        break;
-      }
-
-      case 'd':
-      {
-        int value = getNum("Please enter a number : ");
-        status = add_unique(list, value);
-        break;
-      }
+    case 'a':
+    {
+      int num = getNum( "Please enter a number : ");
+      status = add_to_end(list, num);
+      break;
     }
-   return status; 
+
+    case 'b':
+    {
+      int num = getNum( "Please enter a number : ");
+      status = add_to_start(list, num);
+      break;
+    }
+
+    case 'c':
+    {
+      int value = getNum("Please enter a number : ");
+      int position = getNum("Please enter the position : ");
+      status = insert_at(list, value, position);
+      break;
+    }
+
+    case 'd':
+    {
+      int value = getNum("Please enter a number : ");
+      status = add_unique(list, value);
+      break;
+    }
+
+    case 'l':
+    {
+      display(list);
+      break;
+    }
+  }
 }
 
 int main(void)
@@ -74,7 +81,7 @@ int main(void)
   List_ptr list = create_list();
   char index = get_cmd();
   while(index != 'm'){
-    Status status = do_action(list, index); 
+    do_action(list, index); 
     index = get_cmd();
   }
   return 0;
