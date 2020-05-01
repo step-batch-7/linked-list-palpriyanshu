@@ -110,6 +110,10 @@ Status remove_from_end(List_ptr list){
   }
   list->last->next = NULL;
   list->count--;
+  if(list->count == 0){
+    list->head = NULL;
+    list->last = NULL;
+  }
   free(p_walk);
   p_walk = NULL;
   return Success;
@@ -139,7 +143,7 @@ Status remove_at(List_ptr list, int position)
   p_walk->next = node->next;
   list->count--;
   free(node);
-  free = NULL;
+  node = NULL;
   return Success;
 }
 
