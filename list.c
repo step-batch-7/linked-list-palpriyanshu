@@ -68,13 +68,21 @@ Status insert_at(List_ptr list, int value, int position) {
   return Success;
 };
 
-Status add_unique(List_ptr list, int value){
+Status check_is_num_exist(List_ptr list, int value){
   Node_ptr p_walk = list->head;
-  while (p_walk != NULL ) {
-    if(p_walk->value == value) {
-      return Failure;
+  while(p_walk != NULL){
+    if(p_walk->value == value){
+      return Success;
     }
     p_walk = p_walk->next;
+  }
+  return Failure;
+}
+
+Status add_unique(List_ptr list, int value){
+  Status status = check_is_num_exist(list, value);
+  if(status){
+    return Failure;
   }
   return add_to_end(list, value);
 }
@@ -145,17 +153,6 @@ int find_index(List_ptr list,int num) {
   }
   return NOT_FOUND;
 };
-
-Status check_is_num_exist(List_ptr list, int value){
-  Node_ptr p_walk = list->head;
-  while(p_walk != NULL){
-    if(p_walk->value == value){
-      return Success;
-    }
-    p_walk = p_walk->next;
-  }
-  return Failure;
-}
 
 Status remove_first_occurrence(List_ptr list, int value){
   Status status = check_is_num_exist(list, value);
