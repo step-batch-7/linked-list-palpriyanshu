@@ -23,6 +23,7 @@ void display_main_menu(void){
   printf("(e) remove a number from the beginning of the list\n");
   printf("(f) remove a number from the end of the list\n");
   printf("(g) remove a number from a given position in the list\n");
+  printf("(h) remove first occurrence of a number\n");
   printf("(k) check if a number exists in the list\n");
   printf("(l) display the list of numbers\n");
   printf("(m) exit\n\n");
@@ -99,6 +100,14 @@ void do_action(List_ptr list, char index){
     {
       int position = getNum("Please enter the position : ");
       status = remove_at(list, position);
+      display_status(status);
+      break;
+    }
+
+    case 'h':
+    {
+      int value = getNum("Please enter the value : ");
+      status = remove_first_occurrence(list, value);
       display_status(status);
       break;
     }

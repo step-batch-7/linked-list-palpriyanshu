@@ -132,6 +132,29 @@ Status remove_at(List_ptr list, int position)
   return Success;
 }
 
+int find_index(List_ptr list,int num) {
+  int index = 0;
+  const int NOT_FOUND = -1;
+  Node_ptr p_walk = list->head;
+  while (p_walk != NULL ) {
+    if(p_walk->value == num) {
+      return index;
+    }
+    p_walk = p_walk->next;
+    index++;
+  }
+  return NOT_FOUND;
+};
+
+Status remove_first_occurrence(List_ptr list, int value){
+  Status status = check_is_num_exist(list, value);
+  if(status == Failure){
+    return status;
+  }
+  int index = find_index(list, value);
+  return remove_at(list, index);
+}
+
 Status check_is_num_exist(List_ptr list, int value){
   Node_ptr p_walk = list->head;
   while(p_walk != NULL){
