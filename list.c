@@ -194,8 +194,15 @@ Status clear_list(List_ptr list) {
     node = p_walk;
     p_walk = node->next;
     free(node);
+    node = NULL;
   }
   list->head = NULL;
   list->last = NULL;
   return Success;
 };
+
+void destroy_list(List_ptr list){
+  Status status = clear_list(list);
+  free(list);
+  list = NULL;
+}

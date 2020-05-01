@@ -153,5 +153,6 @@ int main(void)
     do_action(list, index); 
     index = get_cmd();
   }
+  destroy_list(list);
   return 0;
 }
