@@ -100,8 +100,8 @@ Status remove_from_start(List_ptr list){
 };
 
 Status remove_from_end(List_ptr list){
-  if(list->count == 0){
-    return Failure;
+  if(list->count <= 1){
+    return remove_from_start(list);
   }
   Node_ptr p_walk = list->head;
   while(p_walk->next != NULL){
@@ -110,10 +110,6 @@ Status remove_from_end(List_ptr list){
   }
   list->last->next = NULL;
   list->count--;
-  if(list->count == 0){
-    list->head = NULL;
-    list->last = NULL;
-  }
   free(p_walk);
   p_walk = NULL;
   return Success;
@@ -121,21 +117,18 @@ Status remove_from_end(List_ptr list){
 
 Status remove_at(List_ptr list, int position)
 {
-  if(position < 0 || position > (list->count - 1)){
+  if(position < 0 || position > (list->count - 1)) {
     return Failure;
   }
-  if(position == 0)
-  {
+  if(position == 0) {
     return remove_from_start(list);
   }
-  if(position == (list->count-1))
-  {
+  if(position == (list->count-1)) {
     return remove_from_end(list);
   }
   int index = 1;
   Node_ptr p_walk = list->head;
-  while (index != position)
-  {
+  while (index != position) {
     p_walk = p_walk->next;
     index++;
   }
@@ -163,7 +156,7 @@ int find_index(List_ptr list,int num) {
 
 Status remove_first_occurrence(List_ptr list, int value){
   Status status = check_is_num_exist(list, value);
-  if(status == Failure){
+  if(status == Failure) {
     return status;
   }
   int index = find_index(list, value);
@@ -171,15 +164,11 @@ Status remove_first_occurrence(List_ptr list, int value){
 }
 
 Status remove_all_occurrences(List_ptr list, int value){
-  Status status = check_is_num_exist(list, value);
-  if(status){
-    do{
-      status = remove_first_occurrence(list, value);
+  Status status = Failure;
+    while (check_is_num_exist(list, value)){
+      status = remove_first_occurrence(list, value); 
     }
-    while(status);
-    return Success;
-  }
-  return Failure;
+  return status;
 }
 
 void display(List_ptr list){
@@ -205,7 +194,7 @@ Status clear_list(List_ptr list) {
   return Success;
 };
 
-void destroy_list(List_ptr list){
+void destroy_list(List_ptr list) {
   Status status = clear_list(list);
   free(list);
   list = NULL;
