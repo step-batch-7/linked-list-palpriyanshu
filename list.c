@@ -185,3 +185,17 @@ void display(List_ptr list){
     p_walk = p_walk->next;
   }
 }
+
+Status clear_list(List_ptr list) {
+  Node_ptr p_walk = list->head;
+  Node_ptr node = NULL;
+
+  while(p_walk != NULL) {
+    node = p_walk;
+    p_walk = node->next;
+    free(node);
+  }
+  list->head = NULL;
+  list->last = NULL;
+  return Success;
+};

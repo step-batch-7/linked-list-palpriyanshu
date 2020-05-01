@@ -25,6 +25,7 @@ void display_main_menu(void){
   printf("(g) remove a number from a given position in the list\n");
   printf("(h) remove first occurrence of a number\n");
   printf("(i) remove all occurrences of a number\n");
+  printf("(j) clear the whole list\n");
   printf("(k) check if a number exists in the list\n");
   printf("(l) display the list of numbers\n");
   printf("(m) exit\n\n");
@@ -121,6 +122,13 @@ void do_action(List_ptr list, char index){
       break;
     }
 
+    case 'j':
+    {
+      status = clear_list(list);
+      display_status(status);
+      break;
+    }
+      
     case 'k':
     {
       int value = getNum("Please enter the value : ");
