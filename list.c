@@ -132,6 +132,17 @@ Status remove_at(List_ptr list, int position)
   return Success;
 }
 
+Status check_is_num_exist(List_ptr list, int value){
+  Node_ptr p_walk = list->head;
+  while(p_walk != NULL){
+    if(p_walk->value == value){
+      return Success;
+    }
+    p_walk = p_walk->next;
+  }
+  return Failure;
+}
+
 void display(List_ptr list){
   Node_ptr p_walk = list->head;
   while (p_walk != NULL ) {

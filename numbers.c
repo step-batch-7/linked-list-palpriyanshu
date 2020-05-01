@@ -7,6 +7,11 @@ void display_main_menu(void);
 char get_cmd(void);
 int getNum(string text);
 void do_action(List_ptr list, char index);
+void display_status(Status status);
+
+void display_status(Status status){
+  printf("Status of given cmd : %s", status ? "Successful": "Failed");
+}
 
 void display_main_menu(void){
   printf("\nMain Menu\n");
@@ -18,6 +23,7 @@ void display_main_menu(void){
   printf("(e) remove a number from the beginning of the list\n");
   printf("(f) remove a number from the end of the list\n");
   printf("(g) remove a number from a given position in the list\n");
+  printf("(k) check if a number exists in the list\n");
   printf("(l) display the list of numbers\n");
   printf("(m) exit\n\n");
   printf("Please enter the alphabet of the operation you would like to perform\n");
@@ -46,6 +52,7 @@ void do_action(List_ptr list, char index){
     {
       int num = getNum( "Please enter a number : ");
       status = add_to_end(list, num);
+      display_status(status);
       break;
     }
 
@@ -53,6 +60,7 @@ void do_action(List_ptr list, char index){
     {
       int num = getNum( "Please enter a number : ");
       status = add_to_start(list, num);
+      display_status(status);
       break;
     }
 
@@ -61,6 +69,7 @@ void do_action(List_ptr list, char index){
       int value = getNum("Please enter a number : ");
       int position = getNum("Please enter the position : ");
       status = insert_at(list, value, position);
+      display_status(status);
       break;
     }
 
@@ -68,18 +77,21 @@ void do_action(List_ptr list, char index){
     {
       int value = getNum("Please enter a number : ");
       status = add_unique(list, value);
+      display_status(status);
       break;
     }
 
     case 'e':
     {
       status = remove_from_start(list);
+      display_status(status);
       break;
     }
 
     case 'f':
     {
       status = remove_from_end(list);
+      display_status(status);
       break;
     }
 
@@ -87,6 +99,15 @@ void do_action(List_ptr list, char index){
     {
       int position = getNum("Please enter the position : ");
       status = remove_at(list, position);
+      display_status(status);
+      break;
+    }
+
+    case 'k':
+    {
+      int value = getNum("Please enter the value : ");
+      status = check_is_num_exist(list, value);
+      display_status(status);
       break;
     }
 
