@@ -14,10 +14,16 @@ typedef struct node
 } Node;
 
 typedef Node *Node_ptr;
+
+typedef struct {
+  Node_ptr prev;
+  Node_ptr current;
+} Prev_Current_Pair;
+
 typedef struct
 {
-  Node *head;
-  Node *last;
+  Node_ptr head;
+  Node_ptr last;
   int count;
 } List;
 
