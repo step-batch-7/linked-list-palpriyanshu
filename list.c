@@ -18,30 +18,28 @@ Node_ptr create_node(int value){
 };
 
 Status add_to_end(List_ptr list, int value){
-  Node_ptr new_node = create_node(value);
+  Node_ptr node = create_node(value);
   Node_ptr *ptr_to_set = &list->head;
   if (list->head != NULL)
   {
     ptr_to_set = &list->last->next;
   }
-  (*ptr_to_set) = new_node;
-  list->last = new_node;
+  (*ptr_to_set) = node;
+  list->last = node;
   list->count++;
 return Success;
 };
 
 Status add_to_start(List_ptr list, int value){
   Node_ptr node = create_node(value);
-  if(list->head != NULL){
-    node->next = list->head;
-  }
-  else{ 
+  if(list->head == NULL){
     list->last = node;
-  }
+  } 
+  node->next = list->head;
   list->head = node;
   list->count++;
   return Success;
-};
+}
 
 Status insert_at(List_ptr list, int value, int position) {
   if(position < 0 || position > list->count){
