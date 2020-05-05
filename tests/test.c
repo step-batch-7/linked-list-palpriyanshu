@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "list.h"
+#include "../bin/list.h"
 #include "test.h"
 
 void assert(status){
