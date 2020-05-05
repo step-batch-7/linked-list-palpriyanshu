@@ -142,12 +142,11 @@ int find_index(List_ptr list,int num) {
 };
 
 Status remove_first_occurrence(List_ptr list, int value){
-  Status status = check_is_num_exist(list, value);
-  if(status == Failure) {
-    return status;
+  if(check_is_num_exist(list, value)) {
+    int index = find_index(list, value);
+    return remove_at(list, index);
   }
-  int index = find_index(list, value);
-  return remove_at(list, index);
+  return Failure;
 }
 
 Status remove_all_occurrences(List_ptr list, int value){
@@ -167,18 +166,13 @@ void display(List_ptr list){
 }
 
 Status clear_list(List_ptr list) {
-  Node_ptr p_walk = list->head;
-  Node_ptr node = NULL;
-
-  while(p_walk != NULL) {
-    node = p_walk;
-    p_walk = node->next;
-    free(node);
-    node = NULL;
+  Status status;
+  while(list->head != NULL) {
+    status = remove_from_start(list);
   }
   list->head = NULL;
   list->last = NULL;
-  return Success;
+  return status;
 };
 
 void destroy_list(List_ptr list) {
