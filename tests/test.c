@@ -19,12 +19,14 @@ void test_add_to_start(void){
   describe("# ADD_TO_START");
   it("* should add a number to empty list");
   assert(add_to_start(list, 6), Success);
+  assert(is_at(list, 6, 0), Success);
   assert(list->count, 1);
   assert(list->head->value, 6);
   assert(list->last->value, 6);
 
   it("* should add a number to the beginning of list");
   assert(add_to_start(list, 7), Success);
+  assert(is_at(list, 7, 0), Success);
   assert(list->count, 2);
   assert(list->head->value, 7);
   assert(list->last->value, 6);
@@ -37,12 +39,14 @@ void test_add_to_end(void){
   describe("# ADD_TO_END");
   it("* should add a number to empty list");
   assert(add_to_end(list, 6), Success);
+  assert(is_at(list, 6, 0), Success);
   assert(list->count, 1);
   assert(list->head->value, 6);
   assert(list->last->value, 6);
 
   it("* should add a number to the end of list");
   assert(add_to_end(list, 7), Success);
+  assert(is_at(list, 7, 1), Success);
   assert(list->count, 2);
   assert(list->head->value, 6);
   assert(list->last->value, 7);
@@ -55,24 +59,28 @@ void test_insert_at(void){
   describe("# INSERT_AT");
   it("* should insert at first position in empty list");
   assert(insert_at(list, 6, 0), Success);
+  assert(is_at(list, 6, 0), Success);
   assert(list->count, 1);
   assert(list->head->value, 6);
   assert(list->last->value, 6);
 
   it("* should insert at last position in the list");
   assert(insert_at(list, 7, 1), Success);
+  assert(is_at(list, 7, 1), 1);
   assert(list->count, 2);
   assert(list->head->value, 6);
   assert(list->last->value, 7);
 
   it("* should insert at first position in the list");
   assert(insert_at(list, 8, 0), Success);
+  assert(is_at(list, 8, 0), Success);
   assert(list->count, 3);
   assert(list->head->value, 8);
   assert(list->last->value, 7);
 
   it("* should insert a number at any position in the list");
   assert(insert_at(list, 9, 1), Success);
+  assert(is_at(list, 9, 1), Success);
   assert(list->count, 4);
   assert(list->head->value, 8);
   assert(list->last->value, 7);
@@ -97,18 +105,21 @@ void test_add_unique_at_end(void){
   describe("# ADD_UNIQUE_AT_END");
   it("* should add number at first position in the empty list");
   assert(add_unique(list, 6), Success);
+  assert(is_at(list, 6, 0), Success);
   assert(list->count, 1);
   assert(list->head->value, 6);
   assert(list->last->value, 6);
 
   it("* should add number at last in the list if it does not exist already");
   assert(add_unique(list, 7), Success);
+  assert(is_at(list, 7, 1), Success);
   assert(list->count, 2);
   assert(list->head->value, 6);
   assert(list->last->value, 7);
 
   it("* should not add number in the list if it exist already");
-  assert(add_unique(list, 7), Failure);
+  assert(add_unique(list, 6), Failure);
+  assert(is_at(list, 6, 2), Failure);
   assert(list->count, 2);
   assert(list->head->value, 6);
   assert(list->last->value, 7);
@@ -128,6 +139,7 @@ void test_remove_from_start(){
 
   it("* should remove a number from beginning of list");
   assert(remove_from_start(list), Success);
+  assert(is_at(list, 6, 0), Failure);
   assert(list->count, 1);
   assert(list->head->value, 7);
   assert(list->last->value, 7);
@@ -139,7 +151,7 @@ void test_remove_from_end(){
   List_ptr list = create_list();
   describe("# REMOVE_FROM_END");
   it("* should not remove a number from empty list");
-  assert(remove_from_start(list), Failure);
+  assert(remove_from_end(list), Failure);
   assert(list->count, 0);
 
   add_to_start(list, 6);
@@ -147,6 +159,7 @@ void test_remove_from_end(){
 
   it("* should remove a number from end of list");
   assert(remove_from_end(list), Success);
+  assert(is_at(list, 7, 1), Failure);
   assert(list->count, 1);
   assert(list->head->value, 6);
   assert(list->last->value, 6);
@@ -169,18 +182,21 @@ void test_remove_at(){
 
   it("* should remove a number from a given position in the list");
   assert(remove_at(list, 2), Success);
+  assert(is_at(list, 3, 2), Failure);
   assert(list->count, 4);
   assert(list->head->value, 1);
   assert(list->last->value, 5);
 
   it("* should remove a number from beginning of list");
   assert(remove_at(list, 0), Success);
+  assert(is_at(list, 1, 0), Failure);
   assert(list->count, 3);
   assert(list->head->value, 2);
   assert(list->last->value, 5);
 
   it("* should remove a number from end of list");
   assert(remove_at(list, 2), Success);
+  assert(is_at(list, 5, 2), Failure);
   assert(list->count, 2);
   assert(list->head->value, 2);
   assert(list->last->value, 4);
@@ -219,10 +235,10 @@ void test_remove_first_occurrence(){
 
   it("* should remove first occurrence of a number from start of list if it exist once");
   assert(remove_first_occurrence(list, 1), Success);
+  assert(check_is_num_exist(list, 1), Failure);
   assert(list->count, 1);
   assert(list->head->value, 2);
   assert(list->last->value, 2);
-
 
   it("* should not remove a number from the list if it does not exist");
   assert(remove_first_occurrence(list, 3), Failure);
@@ -247,16 +263,17 @@ void test_remove_all_occurrences(){
 
   it("* should remove all occurrence of a number from start of list if it exist once");
   assert(remove_all_occurrences(list, 2), Success);
+  assert(check_is_num_exist(list, 2), Failure);
   assert(list->count, 3);
   assert(list->head->value, 1);
   assert(list->last->value, 3);
 
   it("* should remove all occurrence of a number from start of list if it exist multiple times");
   assert(remove_all_occurrences(list, 1), Success);
+  assert(check_is_num_exist(list, 1), Failure);
   assert(list->count, 1);
   assert(list->head->value, 3);
   assert(list->last->value, 3);
-
 
   it("* should not remove a number from the list if it does not exist");
   assert(remove_all_occurrences(list, 4), Failure);
@@ -278,6 +295,7 @@ void test_clear_list(){
 
  it("* should clear the list if exist and make count 0");
  assert(clear_list(list), Success);
+ assert(check_is_num_exist(list, 2), Failure);
  assert(list->count, 0);
   
  destroy_list(list);

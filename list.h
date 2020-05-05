@@ -32,6 +32,8 @@ Status insert_at(List_ptr, int value, int position);
 Status add_unique(List_ptr, int value);
 
 void display(List_ptr);
+int find_index(List_ptr list,int num);
+int is_at(List_ptr list, int value, int position);
 
 Status remove_from_start(List_ptr);
 Status remove_from_end(List_ptr);
