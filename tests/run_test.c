@@ -7,6 +7,7 @@ void runTests(void);
 void runTests(void){
   test_add_to_start();
   test_add_to_end();
+  test_insert_at();
 }
 
 int main() {

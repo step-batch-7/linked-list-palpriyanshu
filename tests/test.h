@@ -5,10 +5,11 @@
 
 typedef char *String;
 
-void assert(int status);
+void assert(int actual, int expected);
 void it(String text);
 void describe(String text);
 
 void test_add_to_start(void);
 void test_add_to_end(void);
+void test_insert_at(void);
 #endif
