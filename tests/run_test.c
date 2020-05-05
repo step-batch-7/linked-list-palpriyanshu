@@ -11,6 +11,7 @@ void runTests(void){
   test_add_unique_at_end();
   test_remove_from_start();
   test_remove_from_end();
+  test_remove_at();
 }
 
 int main() {
