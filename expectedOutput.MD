@@ -15,7 +15,7 @@
   * should not insert at position which is more than list count
 
 (d) add a unique item on the list at the end(if it alreay exists, do not insert)
-  * should add number at last in the list if it is not exist already
+  * should add number at last in the list if it does not exist already
   * should add number at first position in the empty list
   * should not add number when it is already exist
 
@@ -38,13 +38,13 @@
 (h) remove first occurrence of a number
   * should remove first occurrence of a number from beginning of list if number exist multiple times
   * should remove first occurrence of a number from beginning of list if number exist once
-  * should  not remove a number from the list if it is not exist
+  * should  not remove a number from the list if it does not exist
   * should  not remove a number from empty
 
 (i) remove all occurrences of a number
   * should remove all occurrence of a number from the list if number exist once
   * should remove first occurrence of a number from beginning of list if number exist multiple times
-  * should  not remove a number from the list if it is not exist
+  * should  not remove a number from the list if it does not exist
   * should  not remove a number from empty
   
 (j) clear the whole list
@@ -54,6 +54,3 @@
 (k) check if a number exists in the list
   * should validate if number exists in the list
   * should inValidate if number does not exists in the list
-
-(l) display the list of numbers
-  * should display all the numbers of the list

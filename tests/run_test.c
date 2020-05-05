@@ -15,6 +15,7 @@ void runTests(void){
   test_remove_first_occurrence();
   test_remove_all_occurrences();
   test_clear_list();
+  test_check_is_num_exist();
 }
 
 int main() {

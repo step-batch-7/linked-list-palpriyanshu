@@ -101,7 +101,7 @@ void test_add_unique_at_end(void){
   assert(list->head->value, 6);
   assert(list->last->value, 6);
 
-  it("* should add number at last in the list if it is not exist already");
+  it("* should add number at last in the list if it does not exist already");
   assert(add_unique(list, 7), Success);
   assert(list->count, 2);
   assert(list->head->value, 6);
@@ -224,7 +224,7 @@ void test_remove_first_occurrence(){
   assert(list->last->value, 2);
 
 
-  it("* should not remove a number from the list if it is not exist");
+  it("* should not remove a number from the list if it does not exist");
   assert(remove_first_occurrence(list, 3), Failure);
   assert(list->count, 1);
   assert(list->head->value, 2);
@@ -258,7 +258,7 @@ void test_remove_all_occurrences(){
   assert(list->last->value, 3);
 
 
-  it("* should not remove a number from the list if it is not exist");
+  it("* should not remove a number from the list if it does not exist");
   assert(remove_all_occurrences(list, 4), Failure);
   assert(list->count, 1);
   assert(list->head->value, 3);
@@ -281,4 +281,18 @@ void test_clear_list(){
  assert(list->count, 0);
   
  destroy_list(list);
+};
+
+void test_check_is_num_exist(){
+  List_ptr list = create_list();
+  describe("# CHECK_IS_NUM_EXIST");
+
+  add_to_start(list, 2);
+  it("* should validate if number exists in the list");
+  assert(check_is_num_exist(list, 2), Success);
+
+  it("* should inValidate if number does not exists in the list");
+  assert(check_is_num_exist(list, 3), Failure);
+
+  destroy_list(list);
 };
