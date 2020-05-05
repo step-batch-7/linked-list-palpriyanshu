@@ -266,3 +266,19 @@ void test_remove_all_occurrences(){
 
   destroy_list(list);
 };
+
+void test_clear_list(){
+ List_ptr list = create_list();
+ describe("# CLEAR_LIST");
+ it("* should not clear empty list");
+ assert(clear_list(list), Failure);
+ assert(list->count, 0);
+
+ add_to_start(list, 2);
+
+ it("* should clear the list if exist and make count 0");
+ assert(clear_list(list), Success);
+ assert(list->count, 0);
+  
+ destroy_list(list);
+};

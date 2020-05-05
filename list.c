@@ -166,7 +166,7 @@ void display(List_ptr list){
 }
 
 Status clear_list(List_ptr list) {
-  Status status;
+  Status status = Failure;
   while(list->head != NULL) {
     status = remove_from_start(list);
   }

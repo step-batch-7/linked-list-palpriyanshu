@@ -49,7 +49,7 @@
   
 (j) clear the whole list
   * should clear the list if exist and make count 0
-  * should not clear the list if list does not exist
+  * should not clear empty list
 
 (k) check if a number exists in the list
   * should validate if number exists in the list
