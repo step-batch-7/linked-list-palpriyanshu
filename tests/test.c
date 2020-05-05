@@ -133,3 +133,21 @@ void test_remove_from_start(){
 
   destroy_list(list);
 }
+
+void test_remove_from_end(){
+  List_ptr list = create_list();
+  describe("# REMOVE_FROM_END");
+  it("* should not remove a number from empty list");
+  assert(remove_from_start(list), Failure);
+  assert(list->count, 0);
+
+  add_to_start(list, 6);
+  add_to_end(list, 7);
+  it("* should remove a number from end of list");
+  assert(remove_from_end(list), Success);
+  assert(list->count, 1);
+  assert(list->head->value, 6);
+  assert(list->last->value, 6);
+
+  destroy_list(list);
+}
