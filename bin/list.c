@@ -170,6 +170,7 @@ Status clear_list(List_ptr list) {
   while(list->head != NULL) {
     status = remove_from_start(list);
   }
+  
   list->head = NULL;
   list->last = NULL;
   return status;
