@@ -198,4 +198,37 @@ void test_remove_at(){
   assert(list->last->value, 4);
 
   destroy_list(list);
-}
+};
+
+void test_remove_first_occurrence(){
+  List_ptr list = create_list();
+  describe("# REMOVE_FIRST_OCCURRENCE");
+  it("* should not remove a number from empty list");
+  assert(remove_first_occurrence(list, 3), Failure);
+  assert(list->count, 0);
+
+  add_to_start(list, 1);
+  add_to_end(list, 2);
+  add_to_end(list, 1);
+
+  it("* should remove first occurrence of a number from start of list if it exist multiple times");
+  assert(remove_first_occurrence(list, 1), Success);
+  assert(list->count, 2);
+  assert(list->head->value, 2);
+  assert(list->last->value, 1);
+
+  it("* should remove first occurrence of a number from start of list if it exist once");
+  assert(remove_first_occurrence(list, 1), Success);
+  assert(list->count, 1);
+  assert(list->head->value, 2);
+  assert(list->last->value, 2);
+
+
+  it("* should not remove a number from the list if it is not exist");
+  assert(remove_first_occurrence(list, 3), Failure);
+  assert(list->count, 1);
+  assert(list->head->value, 2);
+  assert(list->last->value, 2);
+
+  destroy_list(list);
+};

@@ -12,6 +12,7 @@ void runTests(void){
   test_remove_from_start();
   test_remove_from_end();
   test_remove_at();
+  test_remove_first_occurrence();
 }
 
 int main() {

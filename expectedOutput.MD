@@ -36,8 +36,10 @@
   * should not remove a number from list if position is more than list count
 
 (h) remove first occurrence of a number
-  * should remove first occurrence of a number from beginning of list if number exist
+  * should remove first occurrence of a number from beginning of list if number exist multiple times
+  * should remove first occurrence of a number from beginning of list if number exist once
   * should  not remove a number from the list if it is not exist
+  * should  not remove a number from empty
 
 (i) remove all occurrences of a number
   * should remove all occurrence of a number from the list if number exist
