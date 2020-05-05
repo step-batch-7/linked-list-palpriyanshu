@@ -232,3 +232,37 @@ void test_remove_first_occurrence(){
 
   destroy_list(list);
 };
+
+void test_remove_all_occurrences(){
+  List_ptr list = create_list();
+  describe("# REMOVE_ALL_OCCURRENCES");
+  it("* should not remove a number from empty list");
+  assert(remove_all_occurrences(list, 3), Failure);
+  assert(list->count, 0);
+
+  add_to_start(list, 1);
+  add_to_end(list, 2);
+  add_to_end(list, 1);
+  add_to_end(list, 3);
+
+  it("* should remove all occurrence of a number from start of list if it exist once");
+  assert(remove_all_occurrences(list, 2), Success);
+  assert(list->count, 3);
+  assert(list->head->value, 1);
+  assert(list->last->value, 3);
+
+  it("* should remove all occurrence of a number from start of list if it exist multiple times");
+  assert(remove_all_occurrences(list, 1), Success);
+  assert(list->count, 1);
+  assert(list->head->value, 3);
+  assert(list->last->value, 3);
+
+
+  it("* should not remove a number from the list if it is not exist");
+  assert(remove_all_occurrences(list, 4), Failure);
+  assert(list->count, 1);
+  assert(list->head->value, 3);
+  assert(list->last->value, 3);
+
+  destroy_list(list);
+};

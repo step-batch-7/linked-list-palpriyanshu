@@ -42,8 +42,10 @@
   * should  not remove a number from empty
 
 (i) remove all occurrences of a number
-  * should remove all occurrence of a number from the list if number exist
+  * should remove all occurrence of a number from the list if number exist once
+  * should remove first occurrence of a number from beginning of list if number exist multiple times
   * should  not remove a number from the list if it is not exist
+  * should  not remove a number from empty
   
 (j) clear the whole list
   * should clear the list if exist and make count 0
