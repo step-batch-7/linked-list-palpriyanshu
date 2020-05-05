@@ -9,6 +9,7 @@ void runTests(void){
   test_add_to_end();
   test_insert_at();
   test_add_unique_at_end();
+  test_remove_from_start();
 }
 
 int main() {
