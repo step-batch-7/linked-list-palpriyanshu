@@ -12,4 +12,5 @@ void describe(String text);
 void test_add_to_start(void);
 void test_add_to_end(void);
 void test_insert_at(void);
+void test_add_unique_at_end(void);
 #endif
