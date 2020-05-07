@@ -5,10 +5,13 @@
 
 typedef char *String;
 
-void assert(int actual, int expected);
+void assert_equal(int actual, int expected);
+void assert_null(Node_ptr value);
 void it(String text);
 void describe(String text);
 
+void test_create_node(void);
+void test_create_list(void);
 void test_add_to_start(void);
 void test_add_to_end(void);
 void test_insert_at(void);

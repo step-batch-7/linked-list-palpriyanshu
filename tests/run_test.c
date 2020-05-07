@@ -5,6 +5,8 @@
 void runTests(void);
 
 void runTests(void){
+  test_create_node();
+  test_create_list();
   test_add_to_start();
   test_add_to_end();
   test_insert_at();
@@ -19,7 +21,8 @@ void runTests(void){
 }
 
 int main() {
-  printf("TESTS_______________\n");
+  printf("TESTS_START_______________\n");
   runTests();
+  printf("\n\nTESTS_END_______________\n");
   return 0;
 }
