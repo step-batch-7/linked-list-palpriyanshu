@@ -1,23 +1,7 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include "test_lib.h"
 #include "../list.h"
-#include "test.h"
-
-void assert_equal(int actual, int expected){
-  printf("%s", actual == expected ? " ✅" : " ❌");
-};
-
-void assert_null(Node_ptr value){
-  printf("%s", value == NULL ? " ✅" : " ❌");
-};
-
-void it(String text){
-  printf("\n  %s :",text);
-};
-
-void describe(String text){
-  printf("\n\n%s",text);
-};
+#include "tests.h"
 
 void test_create_node(void){
   describe("# CREATE_NODE");
@@ -310,9 +294,23 @@ void test_remove_all_occurrences(){
   destroy_list(list);
 };
 
+void test_check_is_num_exist(){
+  List_ptr list = create_list();
+  describe("# CHECK_IS_NUM_EXIST");
+
+  add_to_start(list, 2);
+  it("* should validate if number exists in the list");
+  assert_equal(check_is_num_exist(list, 2), Success);
+
+  it("* should inValidate if number does not exists in the list");
+  assert_equal(check_is_num_exist(list, 3), Failure);
+
+  destroy_list(list);
+};
+
 void test_clear_list(){
- List_ptr list = create_list();
  describe("# CLEAR_LIST");
+ List_ptr list = create_list();
  it("* should not clear empty list");
  assert_equal(clear_list(list), Failure);
  assert_equal(list->count, 0);
@@ -327,16 +325,11 @@ void test_clear_list(){
  destroy_list(list);
 };
 
-void test_check_is_num_exist(){
+void test_destroy_list(){
+  describe("# DESTROY_LIST");
   List_ptr list = create_list();
-  describe("# CHECK_IS_NUM_EXIST");
 
-  add_to_start(list, 2);
-  it("* should validate if number exists in the list");
-  assert_equal(check_is_num_exist(list, 2), Success);
-
-  it("* should inValidate if number does not exists in the list");
-  assert_equal(check_is_num_exist(list, 3), Failure);
-
+  it("* should destroy list");
+  assert_null(list);
   destroy_list(list);
 };

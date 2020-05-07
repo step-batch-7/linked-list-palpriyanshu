@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include "test_lib.h"
 #include "../list.h"
-#include "test.h"
+#include "tests.h"
 
 void runTests(void);
 
@@ -16,8 +17,8 @@ void runTests(void){
   test_remove_at();
   test_remove_first_occurrence();
   test_remove_all_occurrences();
-  test_clear_list();
   test_check_is_num_exist();
+  test_clear_list();
 }
 
 int main() {
