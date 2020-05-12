@@ -10,27 +10,33 @@ List_ptr create_list(void){
   return list;
 };
 
-Node_ptr create_node(int value){
+int_ptr create_int_data(int value){
+  int_ptr data = malloc(sizeof(int));
+  *data = value;
+  return data;
+}
+
+Node_ptr create_node(Void_ptr data){
   Node_ptr new_node = malloc(sizeof(Node));
-  new_node->value = value;
+  new_node->data = data;
   new_node->next = NULL;
   return new_node;
 };
 
-Status add_to_end(List_ptr list, int value){
-  return insert_at(list, value, list->count);
+Status add_to_end(List_ptr list, Void_ptr data){
+  return insert_at(list, data, list->count);
 };
 
-Status add_to_start(List_ptr list, int value){
-  return insert_at(list, value, 0);
+Status add_to_start(List_ptr list, Void_ptr data){
+  return insert_at(list, data, 0);
 }
 
-Status insert_at(List_ptr list, int value, int position) {
+Status insert_at(List_ptr list, Void_ptr data, int position) {
   if(position < 0 || position > list->count){
     return Failure;
   }
   
-  Node_ptr node = create_node(value);
+  Node_ptr node = create_node(data);
 
   if(position == list->count || list->count == 0){
     list->last = node;
@@ -56,10 +62,10 @@ Status insert_at(List_ptr list, int value, int position) {
   return Success;
 };
 
-Status check_is_num_exist(List_ptr list, int value){
+Status check_is_num_exist(List_ptr list, Void_ptr data){
   Node_ptr p_walk = list->head;
   while(p_walk != NULL){
-    if(p_walk->value == value){
+    if(p_walk->data == data){
       return Success;
     }
     p_walk = p_walk->next;
@@ -67,11 +73,11 @@ Status check_is_num_exist(List_ptr list, int value){
   return Failure;
 }
 
-Status add_unique(List_ptr list, int value){
-  if(check_is_num_exist(list, value)){
+Status add_unique(List_ptr list, Void_ptr data){
+  if(check_is_num_exist(list, data)){
     return Failure;
   }
-  return insert_at(list, value, list->count);
+  return insert_at(list, data, list->count);
 }
 
 Status remove_from_start(List_ptr list){
@@ -127,12 +133,12 @@ Status remove_at(List_ptr list, int position)
   return Success;
 }
 
-int find_index(List_ptr list,int num) {
+int find_index(List_ptr list, Void_ptr data) {
   int index = 0;
   const int NOT_FOUND = -1;
   Node_ptr p_walk = list->head;
   while (p_walk != NULL ) {
-    if(p_walk->value == num) {
+    if(p_walk->data == data) {
       return index;
     }
     p_walk = p_walk->next;
@@ -141,23 +147,23 @@ int find_index(List_ptr list,int num) {
   return NOT_FOUND;
 };
 
-Status remove_first_occurrence(List_ptr list, int value) {
-  if(check_is_num_exist(list, value)) {
-    int index = find_index(list, value);
+Status remove_first_occurrence(List_ptr list, Void_ptr data) {
+  if(check_is_num_exist(list, data)) {
+    int index = find_index(list, data);
     return remove_at(list, index);
   }
   return Failure;
 }
 
-Status remove_all_occurrences(List_ptr list, int value) {
+Status remove_all_occurrences(List_ptr list, Void_ptr data) {
   Status status = Failure;
-    while (check_is_num_exist(list, value)){
-      status = remove_first_occurrence(list, value); 
+    while (check_is_num_exist(list, data)){
+      status = remove_first_occurrence(list, data); 
     }
   return status;
 }
 
-int is_at(List_ptr list, int value, int position) {
+int is_at(List_ptr list, Void_ptr data, int position) {
   if (position > list->count - 1 || position < 0){
     return 0;
   }
@@ -168,13 +174,17 @@ int is_at(List_ptr list, int value, int position) {
     p_walk = p_walk->next;
     count++;
   }
-  return p_walk->value == value;
+  return p_walk->data == data;
 }
 
-void display(List_ptr list){
+void display_int(Void_ptr data){
+  printf("%d ", *(int_ptr)data);
+};
+
+void display(List_ptr list, Displayer displayer){
   Node_ptr p_walk = list->head;
   while (p_walk != NULL ) {
-    printf("%d\n", p_walk->value);
+    (*displayer)(p_walk->data);
     p_walk = p_walk->next;
   }
 }

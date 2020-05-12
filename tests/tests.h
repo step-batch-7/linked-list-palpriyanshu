@@ -14,5 +14,6 @@ void test_remove_first_occurrence(void);
 void test_remove_all_occurrences(void);
 void test_check_is_num_exist(void);
 void test_clear_list(void);
+void test_destroy_list(void);
 
 #endif

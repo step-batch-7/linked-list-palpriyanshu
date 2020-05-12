@@ -54,7 +54,8 @@ void do_action(List_ptr list, char index){
     case 'a':
     {
       int num = getNum( "Please enter a number : ");
-      status = add_to_end(list, num);
+      int_ptr data = create_int_data(num);
+      status = add_to_end(list, data);
       display_status(status);
       break;
     }
@@ -62,7 +63,8 @@ void do_action(List_ptr list, char index){
     case 'b':
     {
       int num = getNum( "Please enter a number : ");
-      status = add_to_start(list, num);
+      int_ptr data = create_int_data(num);
+      status = add_to_start(list, data);
       display_status(status);
       break;
     }
@@ -70,8 +72,9 @@ void do_action(List_ptr list, char index){
     case 'c':
     {
       int value = getNum("Please enter a number : ");
+      int_ptr data = create_int_data(value);
       int position = getNum("Please enter the position : ");
-      status = insert_at(list, value, position);
+      status = insert_at(list, data, position);
       display_status(status);
       break;
     }
@@ -79,7 +82,8 @@ void do_action(List_ptr list, char index){
     case 'd':
     {
       int value = getNum("Please enter a number : ");
-      status = add_unique(list, value);
+      int_ptr data = create_int_data(value);
+      status = add_unique(list, data);
       display_status(status);
       break;
     }
@@ -109,7 +113,8 @@ void do_action(List_ptr list, char index){
     case 'h':
     {
       int value = getNum("Please enter the value : ");
-      status = remove_first_occurrence(list, value);
+      int_ptr data = create_int_data(value);
+      status = remove_first_occurrence(list, data);
       display_status(status);
       break;
     }
@@ -117,7 +122,8 @@ void do_action(List_ptr list, char index){
     case 'i':
     {
       int value = getNum("Please enter the value : ");
-      status = remove_all_occurrences(list, value);
+      int_ptr data = create_int_data(value);
+      status = remove_all_occurrences(list, data);
       display_status(status);
       break;
     }
@@ -132,14 +138,15 @@ void do_action(List_ptr list, char index){
     case 'k':
     {
       int value = getNum("Please enter the value : ");
-      status = check_is_num_exist(list, value);
+      int_ptr data = create_int_data(value);
+      status = check_is_num_exist(list, data);
       display_status(status);
       break;
     }
 
     case 'l':
     {
-      display(list);
+      display(list, display_int);
       break;
     }
   }
